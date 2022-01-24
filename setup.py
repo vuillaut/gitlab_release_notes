@@ -29,14 +29,14 @@ def read_requirements(path):
 
 
 setup(
-    name="gitlabrenogen",
+    name="gitlabrng",
     version=read("gitlabrng", "VERSION"),
     description="Generate release notes for a gitlab project",
     url="https://github.com/vuillaut/GitlabReleaseNotesGenerator/",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     author="vuillaut",
-    packages=find_packages(exclude=["tests", ".github"]),
+    packages=find_packages(exclude=["gitlabrng/tests", ".github"]),
     install_requires=read_requirements("requirements.txt"),
     entry_points={
         "console_scripts": ["testtemplate2 = gitlabrng.__main__:main"]
