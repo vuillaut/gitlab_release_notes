@@ -8,7 +8,7 @@ def generate_release_notes(project_id, gitlab_url='https://gitlab.com/'):
     """
     gl = gitlab.Gitlab(gitlab_url)
     project = gl.projects.get(project_id)
-    
+
     if not project.mergerequests.list(state='merged'):
         raise ValueError(f"There is not merged merge request for project {project_id} {project.name}")
 
@@ -26,7 +26,7 @@ def generate_release_notes(project_id, gitlab_url='https://gitlab.com/'):
     print(log)
     page = 0
     while last_mr_date > last_release_date:
-        for imr, mr in enumerate(eossr.mergerequests.list(state='merged', order_by='updated_at', page=page)):
+        for imr, mr in enumerate(project.mergerequests.list(state='merged', order_by='updated_at', page=page)):
             last_mr_date = datetime.fromisoformat(mr.merged_at)
             if last_mr_date < last_release_date:
                 continue
