@@ -6,7 +6,7 @@ from setuptools import find_packages, setup
 
 def read(*paths, **kwargs):
     """Read the contents of a text file safely.
-    >>> read("gitlabrng", "VERSION")
+    >>> read("gitlab_release_notes", "VERSION")
     '0.1.0'
     >>> read("README.md")
     ...
@@ -29,17 +29,17 @@ def read_requirements(path):
 
 
 setup(
-    name="gitlabrng",
-    version=read("gitlabrng", "VERSION"),
+    name="gitlab_release_notes",
+    version=read("gitlab_release_notes", "VERSION"),
     description="Generate release notes for a gitlab project",
     url="https://github.com/vuillaut/GitlabReleaseNotesGenerator/",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     author="vuillaut",
-    packages=find_packages(exclude=["gitlabrng/tests", ".github"]),
+    packages=find_packages(exclude=["gitlab_release_notes/tests", ".github"]),
     install_requires=read_requirements("requirements.txt"),
     entry_points={
-        "console_scripts": ["gitlab-release-notes = gitlabrng.generate:main"]
+        "console_scripts": ["gitlab-release-notes = gitlab_release_notes.generate:main"]
     },
     extras_require={"test": read_requirements("requirements-test.txt")},
 )
