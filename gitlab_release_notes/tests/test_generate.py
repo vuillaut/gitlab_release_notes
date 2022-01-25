@@ -1,4 +1,4 @@
-from gitlabrng import generate_release_notes
+from gitlab_release_notes import generate_release_notes
 
 
 def test_generate_release_notes():
