@@ -32,7 +32,7 @@ setup(
     name="gitlab_release_notes",
     version=read("gitlab_release_notes", "VERSION"),
     description="Generate release notes for a gitlab project",
-    url="https://github.com/vuillaut/GitlabReleaseNotesGenerator/",
+    url="https://github.com/vuillaut/gitlab_release_notes",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     author="vuillaut",
