@@ -1,6 +1,5 @@
 import gitlab
-from datetime import datetime
-
+from .version import __version__
 
 def generate_release_notes(project_id, **config):
     """
@@ -76,6 +75,7 @@ def main():
     # Optional
     parser.add_argument("--url", default="https://gitlab.com", required=False)
     parser.add_argument("--private_token", type=str, required=False, default=None)
+    parser.add_argument('--version', action='version', version=__version__)
 
     args = parser.parse_args()
 

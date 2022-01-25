@@ -2,7 +2,7 @@
 import io
 import os
 from setuptools import find_packages, setup
-
+import re
 
 def read(*paths, **kwargs):
     """Read the contents of a text file safely.
@@ -20,6 +20,12 @@ def read(*paths, **kwargs):
     return content
 
 
+def get_version():
+    with open(os.path.join(os.path.dirname(__file__), 'gitlab_release_notes/version.py')) as f:
+        result = re.search(r'{}\s*=\s*[\'"]([^\'"]*)[\'"]'.format('__version__'), f.read())
+    return result.group(1)
+
+
 def read_requirements(path):
     return [
         line.strip()
@@ -30,7 +36,7 @@ def read_requirements(path):
 
 setup(
     name="gitlab_release_notes",
-    version=read("gitlab_release_notes", "VERSION"),
+    version=get_version(),
     description="Generate release notes for a gitlab project",
     url="https://github.com/vuillaut/gitlab_release_notes",
     long_description=read("README.md"),
