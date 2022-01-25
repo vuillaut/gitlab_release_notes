@@ -13,8 +13,8 @@ def read(*paths, **kwargs):
     """
     content = ""
     with io.open(
-        os.path.join(os.path.dirname(__file__), *paths),
-        encoding=kwargs.get("encoding", "utf8"),
+            os.path.join(os.path.dirname(__file__), *paths),
+            encoding=kwargs.get("encoding", "utf8"),
     ) as open_file:
         content = open_file.read().strip()
     return content
@@ -39,7 +39,7 @@ setup(
     packages=find_packages(exclude=["gitlabrng/tests", ".github"]),
     install_requires=read_requirements("requirements.txt"),
     entry_points={
-        "console_scripts": ["testtemplate2 = gitlabrng.__main__:main"]
+        "console_scripts": ["gitlab-release-notes = gitlabrng.generate:main"]
     },
     extras_require={"test": read_requirements("requirements-test.txt")},
 )
