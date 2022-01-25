@@ -43,9 +43,9 @@ setup(
     long_description_content_type="text/markdown",
     author="vuillaut",
     packages=find_packages(exclude=["gitlab_release_notes/tests", ".github"]),
-    install_requires=read_requirements("requirements.txt"),
+    install_requires=['python-gitlab>=3.0'],
     entry_points={
         "console_scripts": ["gitlab-release-notes = gitlab_release_notes.generate:main"]
     },
-    extras_require={"test": read_requirements("requirements-test.txt")},
+    extras_require={"test": ['pytest']},
 )
