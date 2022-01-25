@@ -30,7 +30,7 @@ heroku local
 ### Push changes
 
 ```
-git remote add herokuhttps://git.heroku.com/gitlab-release-notes.git
+git remote add heroku https://git.heroku.com/gitlab-release-notes.git
 ```
 
 ``` 
