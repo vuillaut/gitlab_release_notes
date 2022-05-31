@@ -36,15 +36,16 @@ def generate_release_notes(project_id, **config):
 
     if not project.releases.list():
         log = f"Changelog of {project.name}:{endstr}"
+        last_date = '0000-01-01T00:00:00Z'
     else:
         last_release = project.releases.list()[0]
         log = f"Changelog since release {last_release.name} of {project.name}:{endstr}"
+        last_date = last_release.released_at
 
-    print(log)
     page = 0
     list_mrs = project.mergerequests.list(state='merged',
                                           order_by='updated_at',
-                                          updated_after=last_release.released_at,
+                                          updated_after=last_date,
                                           page=page)
     if not list_mrs:
         raise ValueError(f"There is no merged merge request after the last release {last_release.name}")
@@ -58,7 +59,7 @@ def generate_release_notes(project_id, **config):
         page += 1
         list_mrs = project.mergerequests.list(state='merged',
                                               order_by='updated_at',
-                                              updated_after=last_release.released_at,
+                                              updated_after=last_date,
                                               page=page
                                               )
 
