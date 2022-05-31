@@ -41,13 +41,14 @@ def generate_release_notes(project_id, endstr = '  <br>', **config):
         log = f"Changelog since release {last_release.name} of {project.name}:{endstr}"
         last_date = last_release.released_at
 
-    page = 0
+    page = 1
     list_mrs = project.mergerequests.list(state='merged',
                                           order_by='updated_at',
                                           updated_after=last_date,
                                           page=page)
     if not list_mrs:
-        raise ValueError(f"There is no merged merge request after the last release {last_release.name}")
+        log += f"There is no merged merge request after {last_date}"
+        return log
 
     while list_mrs:
         for mr in list_mrs:
@@ -75,10 +76,16 @@ def main():
     parser.add_argument("--url", default="https://gitlab.com", required=False)
     parser.add_argument("--private_token", type=str, required=False, default=None)
     parser.add_argument('--version', action='version', version=__version__)
+    parser.add_argument('--html', action='store_true')
 
     args = parser.parse_args()
 
-    notes = generate_release_notes(args.project_id, url=args.url, private_token=args.private_token)
+    if args.html:
+        endstr = '  <br>'
+    else:
+        endstr = '\n'
+    notes = generate_release_notes(args.project_id, url=args.url, endstr=endstr, private_token=args.private_token)
+    print(notes)
 
 
 if __name__ == "__main__":
