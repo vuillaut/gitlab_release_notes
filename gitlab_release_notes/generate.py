@@ -1,7 +1,7 @@
 import gitlab
 from .version import __version__
 
-def generate_release_notes(project_id, **config):
+def generate_release_notes(project_id, endstr = '  <br>', **config):
     """
     Generate the release notes of a gitlab project from the last release
 
@@ -26,7 +26,6 @@ def generate_release_notes(project_id, **config):
         user_agent: str = 'python-gitlab/3.1.0',
         retry_transient_errors: bool = False,
     """
-    endstr = '    <br>'
 
     gl = gitlab.Gitlab(**config)
     project = gl.projects.get(project_id)
