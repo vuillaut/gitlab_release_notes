@@ -54,7 +54,6 @@ def generate_release_notes(project_id, **config):
         for mr in list_mrs:
             line = f" * {mr.title} (@{mr.author['username']}){endstr}"
             log += line
-            print(line)
 
         page += 1
         list_mrs = project.mergerequests.list(state='merged',
