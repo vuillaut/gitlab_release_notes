@@ -1,4 +1,0 @@
-python-gitlab
-flask
-gunicorn
-gitlab_release_notes
