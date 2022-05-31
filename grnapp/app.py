@@ -14,7 +14,10 @@ def release_notes():
     url = request.form['url']
     private_token = request.form['private_token']
 
-    changelog = generate_release_notes(project_id, url=url, private_token=private_token)
+    changelog = generate_release_notes(project_id,
+    url=url,
+    endstr='  <br>',
+    private_token=private_token)
 
     return changelog
 

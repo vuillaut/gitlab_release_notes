@@ -1,4 +1,4 @@
 python-gitlab
 flask
 gunicorn
-gitlab_release_notes
+gitlab_release_notes>=0.2
