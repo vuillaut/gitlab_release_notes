@@ -3,7 +3,10 @@
 Generate a changelog listing all merged requests since the last release of the repository.
 
 ## Do it online: 
-[![Heroku](https://pyheroku-badge.herokuapp.com/?app=gitlab-release-notes)](https://gitlab-release-notes.herokuapp.com/)
+[![https://img.shields.io/badge/back4app-run-brightgreen](https://img.shields.io/badge/back4app-run-brightgreen)](https://gitlabreleasenotes-thomasvuillaume.b4a.run/)
+
+## Alternative
+If the back4app is down for any reason, you may try on mybinder:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vuillaut/GitlabReleaseNotesGenerator/HEAD?labpath=generate.ipynb)
 
 
