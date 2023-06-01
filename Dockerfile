@@ -11,7 +11,7 @@ COPY . /app
 RUN pip install -r requirements.txt
 
 # Make port 80 available to the world outside this container
-EXPOSE 5000
+EXPOSE 8000
 
 # Define environment variable
 ENV NAME Gitlab Release Notes
