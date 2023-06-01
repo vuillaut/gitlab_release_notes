@@ -2,19 +2,89 @@
 <html>
 
 <head>
-    <h1>Release notes generator for gitlab repositories</h1>
-    Insert your project ID, URL of your gitlab instance and private token if the repository is not publicly available.<br>
-    The APP will generate a changelog listing all merged requests since the last release of the repository.
+    <title>Release notes generator for gitlab repositories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        form {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            width: 97%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #333333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
 <body>
-    <form method="POST">
-        <p>Project ID <input type = "text" name = "project_id" /></p>
-        <p>gitlab URL <input type = "text" name = "url" value="https://gitlab.in2p3.fr"/></p>
-        <p>Private token (optional) <input type = "text" name = "private_token" /></p>
-        <p><input type = "submit" value = "submit" /></p>
-     </form>
-</body>
+    <div class="container">
+        <h1>Release notes generator for gitlab repositories</h1>
+        
+        <style>
+            .info-text {
+                font-size: 1em;
+                line-height: 1.5;
+                color: #333;
+                margin-bottom: 20px;
+                background-color: #f9f9f9;
+                padding: 20px;
+                border-radius: 5px;
+                border-left: 5px solid #333333;
+            }
+        </style>
+        
+        <div class="info-text">
+            <p>Insert your project ID, URL of your gitlab instance, and private token (if the repository is not publicly available).</p>
+            <p>The application will generate a changelog listing all merged requests since the last release of the repository.</p>
+        </div>
 
+        <form method="POST">
+            <p>Project ID <input type = "text" name = "project_id" /></p>
+            <p>gitlab URL <input type = "text" name = "url" value="https://gitlab.in2p3.fr"/></p>
+            <p>Private token (optional) <input type = "text" name = "private_token" /></p>
+            <p><input type = "submit" value = "submit" /></p>
+        </form>
+    </div>
+</body>
 
 </html>
