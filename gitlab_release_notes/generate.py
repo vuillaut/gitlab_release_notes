@@ -1,9 +1,10 @@
+import datetime
 import gitlab
 import os.path
 import sys
 from .version import __version__
 
-def generate_release_notes(project_id, endstr = '  <br>', **config):
+def generate_release_notes(project_id, endstr = '  <br>', since=None, **config):
     """
     Generate the release notes of a gitlab project from the last release
 
@@ -35,7 +36,10 @@ def generate_release_notes(project_id, endstr = '  <br>', **config):
     if not project.mergerequests.list(get_all=False,state='merged'):
         raise ValueError(f"There is no merged merge request for project {project_id} {project.name}")
 
-    if not project.releases.list(get_all=False):
+    if since:
+        log = f"Changelog of {project.name} since {since}:{endstr}"
+        last_date = since
+    elif not project.releases.list(get_all=False):
         log = f"Changelog of {project.name}:{endstr}"
         last_date = '0000-01-01T00:00:00Z'
     else:
@@ -82,6 +86,7 @@ def main():
     parser.add_argument("--private_token", type=str, required=False, default=None)
     parser.add_argument('--version', action='version', version=__version__)
     parser.add_argument('--html', action='store_true')
+    parser.add_argument('--since', type=datetime.date.fromisoformat, required=False, default=None)
 
     args = parser.parse_args()
 
@@ -89,7 +94,12 @@ def main():
         endstr = '  <br>'
     else:
         endstr = '\n'
-    notes = generate_release_notes(args.project_id, url=args.url, endstr=endstr, private_token=args.private_token)
+    notes = generate_release_notes(args.project_id,
+                                   url=args.url,
+                                   endstr=endstr,
+                                   since=args.since,
+                                   private_token=args.private_token,
+            )
     print(notes)
 
 if __name__ == "__main__":
