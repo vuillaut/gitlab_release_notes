@@ -58,7 +58,7 @@ def generate_release_notes(project_id, endstr = '  <br>', since=None, quiet=Fals
     if not list_mrs:
         if not quiet:
             log += log_pending
-            log += f"There is no merged merge request after {last_date}"
+            log += f"There is no merged merge request after {last_date}{endstr}"
         return log
 
     log += log_pending
