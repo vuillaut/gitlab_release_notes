@@ -4,7 +4,7 @@ import os.path
 import sys
 from .version import __version__
 
-def generate_release_notes(project_id, endstr = '  <br>', since=None, **config):
+def generate_release_notes(project_id, endstr = '  <br>', since=None, quiet=False, **config):
     """
     Generate the release notes of a gitlab project from the last release
 
@@ -36,15 +36,17 @@ def generate_release_notes(project_id, endstr = '  <br>', since=None, **config):
     if not project.mergerequests.list(get_all=False,state='merged'):
         raise ValueError(f"There is no merged merge request for project {project_id} {project.name}")
 
+    log = ""
+
     if since:
-        log = f"Changelog of {project.name} since {since}:{endstr}"
+        log_pending = f"Changelog of {project.name} since {since}:{endstr}"
         last_date = since
     elif not project.releases.list(get_all=False):
-        log = f"Changelog of {project.name}:{endstr}"
+        log_pending = f"Changelog of {project.name}:{endstr}"
         last_date = '0000-01-01T00:00:00Z'
     else:
         last_release = project.releases.list(get_all=False)[0]
-        log = f"Changelog since release {last_release.name} of {project.name}:{endstr}"
+        log_pending = f"Changelog since release {last_release.name} of {project.name}:{endstr}"
         last_date = last_release.released_at
 
     page = 1
@@ -54,9 +56,12 @@ def generate_release_notes(project_id, endstr = '  <br>', since=None, **config):
                                           updated_after=last_date,
                                           page=page)
     if not list_mrs:
-        log += f"There is no merged merge request after {last_date}"
+        if not quiet:
+            log += log_pending
+            log += f"There is no merged merge request after {last_date}"
         return log
 
+    log += log_pending
     while list_mrs:
         for mr in list_mrs:
             line = f" * {mr.title} (@{mr.author['username']}){endstr}"
@@ -87,6 +92,7 @@ def main():
     parser.add_argument('--version', action='version', version=__version__)
     parser.add_argument('--html', action='store_true')
     parser.add_argument('--since', type=datetime.date.fromisoformat, required=False, default=None)
+    parser.add_argument('--quiet', action='store_true')
 
     args = parser.parse_args()
 
@@ -98,6 +104,7 @@ def main():
                                    url=args.url,
                                    endstr=endstr,
                                    since=args.since,
+                                   quiet=args.quiet,
                                    private_token=args.private_token,
             )
     print(notes)
