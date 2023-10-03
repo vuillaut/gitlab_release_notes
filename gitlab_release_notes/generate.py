@@ -33,7 +33,7 @@ def generate_release_notes(project_id, endstr = '  <br>', **config):
     project = gl.projects.get(project_id)
 
     if not project.mergerequests.list(get_all=False,state='merged'):
-        raise ValueError(f"There is not merged merge request for project {project_id} {project.name}")
+        raise ValueError(f"There is no merged merge request for project {project_id} {project.name}")
 
     if not project.releases.list(get_all=False):
         log = f"Changelog of {project.name}:{endstr}"
