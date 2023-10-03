@@ -1,4 +1,6 @@
 import gitlab
+import os.path
+import sys
 from .version import __version__
 
 def generate_release_notes(project_id, endstr = '  <br>', **config):
@@ -67,8 +69,9 @@ def generate_release_notes(project_id, endstr = '  <br>', **config):
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser("Generate release notes for a gitlab repository \
-                                    based on merge requests titles since last release")
+    parser = argparse.ArgumentParser(os.path.basename(sys.argv[0]),
+                                     description="Generate release notes for a gitlab repository \
+                                     based on merge requests titles since last release")
 
     # Required
     parser.add_argument("project_id", type=int)
@@ -86,7 +89,6 @@ def main():
         endstr = '\n'
     notes = generate_release_notes(args.project_id, url=args.url, endstr=endstr, private_token=args.private_token)
     print(notes)
-
 
 if __name__ == "__main__":
     main()
