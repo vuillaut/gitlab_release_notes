@@ -1,4 +1,4 @@
-"""Python setup.py for testtemplate2 package"""
+"""Python setup.py for gitlab_release_notes package"""
 import io
 import os
 from setuptools import find_packages, setup
