@@ -32,19 +32,20 @@ def generate_release_notes(project_id, endstr = '  <br>', **config):
     gl = gitlab.Gitlab(**config)
     project = gl.projects.get(project_id)
 
-    if not project.mergerequests.list(state='merged'):
-        raise ValueError(f"There is not merged merge request for project {project_id} {project.name}")
+    if not project.mergerequests.list(get_all=False,state='merged'):
+        raise ValueError(f"There is no merged merge request for project {project_id} {project.name}")
 
-    if not project.releases.list():
+    if not project.releases.list(get_all=False):
         log = f"Changelog of {project.name}:{endstr}"
         last_date = '0000-01-01T00:00:00Z'
     else:
-        last_release = project.releases.list()[0]
+        last_release = project.releases.list(get_all=False)[0]
         log = f"Changelog since release {last_release.name} of {project.name}:{endstr}"
         last_date = last_release.released_at
 
     page = 1
     list_mrs = project.mergerequests.list(state='merged',
+                                          get_all=False,
                                           order_by='updated_at',
                                           updated_after=last_date,
                                           page=page)
@@ -59,6 +60,7 @@ def generate_release_notes(project_id, endstr = '  <br>', **config):
 
         page += 1
         list_mrs = project.mergerequests.list(state='merged',
+                                              get_all=False,
                                               order_by='updated_at',
                                               updated_after=last_date,
                                               page=page
