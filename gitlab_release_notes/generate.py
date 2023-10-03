@@ -107,7 +107,8 @@ def main():
                                    quiet=args.quiet,
                                    private_token=args.private_token,
             )
-    print(notes)
+    if notes:
+        print(notes)
 
 if __name__ == "__main__":
     main()
