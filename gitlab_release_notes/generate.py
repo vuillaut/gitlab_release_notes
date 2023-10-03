@@ -94,7 +94,12 @@ def main():
         endstr = '  <br>'
     else:
         endstr = '\n'
-    notes = generate_release_notes(args.project_id, url=args.url, endstr=endstr, private_token=args.private_token, since=args.since)
+    notes = generate_release_notes(args.project_id,
+                                   url=args.url,
+                                   endstr=endstr,
+                                   since=args.since,
+                                   private_token=args.private_token,
+            )
     print(notes)
 
 if __name__ == "__main__":
