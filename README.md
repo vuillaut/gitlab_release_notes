@@ -22,8 +22,10 @@ Then run:
 gitlab-release-notes --help
 ```
 
-## Heroku 
+## Web App 
 
-Heroku is setup in the `heroku` branch.
+The webapp is currently running on back4app.
+
+back4app is setup in the `back4app` branch.
 - make a new release of `gitlab_release_notes`
-- manually deploy from https://dashboard.heroku.com/apps/gitlab-release-notes/deploy/github choosing the heroku branch
+- https://www.back4app.com/
