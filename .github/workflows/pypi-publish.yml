@@ -30,7 +30,7 @@ jobs:
     - name: Building package
       run: python setup.py sdist bdist_wheel 
     - name: Publish package
-      uses: pypa/gh-action-pypi-publish@87b624f8716b1150d93f45fa364e49eceebf3ffd
+      uses: pypa/gh-action-pypi-publish@f7600683efdcb7656dec5b29656edb7bc586e597
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
