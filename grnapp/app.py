@@ -20,6 +20,7 @@ def release_notes():
         since=None,
         url=url,
         private_token=private_token,
+        target_branch=target_branch,
     )
 
     return changelog
