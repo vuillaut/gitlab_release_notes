@@ -4,7 +4,7 @@ import os.path
 import sys
 from .version import __version__
 
-def generate_release_notes(project_id, endstr = '  <br>', since=None, quiet=False, **config):
+def generate_release_notes(project_id, endstr = '  <br>', since=None, quiet=False, target_branch=None, **config):
     """
     Generate the release notes of a gitlab project from the last release
 
@@ -33,7 +33,7 @@ def generate_release_notes(project_id, endstr = '  <br>', since=None, quiet=Fals
     gl = gitlab.Gitlab(**config)
     project = gl.projects.get(project_id)
 
-    if not project.mergerequests.list(get_all=False,state='merged'):
+    if not project.mergerequests.list(get_all=False,state='merged', target_branch=target_branch):
         raise ValueError(f"There is no merged merge request for project {project_id} {project.name}")
 
     log = ""
@@ -54,6 +54,7 @@ def generate_release_notes(project_id, endstr = '  <br>', since=None, quiet=Fals
                                           get_all=False,
                                           order_by='updated_at',
                                           updated_after=last_date,
+                                          target_branch=target_branch,
                                           page=page)
     if not list_mrs:
         if not quiet:
@@ -72,6 +73,7 @@ def generate_release_notes(project_id, endstr = '  <br>', since=None, quiet=Fals
                                               get_all=False,
                                               order_by='updated_at',
                                               updated_after=last_date,
+                                              target_branch=target_branch,
                                               page=page
                                               )
 
@@ -92,6 +94,7 @@ def main():
     parser.add_argument('--version', action='version', version=__version__)
     parser.add_argument('--html', action='store_true')
     parser.add_argument('--since', type=datetime.date.fromisoformat, required=False, default=None)
+    parser.add_argument('--target_branch', type=str, required=False, default=None)
     parser.add_argument('--quiet', action='store_true')
 
     args = parser.parse_args()
@@ -104,6 +107,7 @@ def main():
                                    url=args.url,
                                    endstr=endstr,
                                    since=args.since,
+                                   target_branch=args.target_branch,
                                    quiet=args.quiet,
                                    private_token=args.private_token,
             )
