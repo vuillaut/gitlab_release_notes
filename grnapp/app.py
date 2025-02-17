@@ -13,6 +13,7 @@ def release_notes():
     project_id = request.form['project_id']
     url = request.form['url']
     private_token = request.form['private_token']
+    target_branch = request.form['target_branch']
 
     changelog = generate_release_notes(
         project_id,
