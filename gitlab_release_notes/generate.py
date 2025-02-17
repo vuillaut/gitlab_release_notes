@@ -59,7 +59,7 @@ def generate_release_notes(project_id, endstr = '  <br>', since=None, quiet=Fals
     page = 1
     list_mrs = project.mergerequests.list(state='merged',
                                           get_all=False,
-                                          order_by='updated_at',
+                                          order_by='merged_at',
                                           updated_after=last_date,
                                           page=page)
     if not list_mrs:
