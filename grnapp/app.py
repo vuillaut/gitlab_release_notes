@@ -15,16 +15,21 @@ def release_notes():
     private_token = request.form['private_token']
     target_branch = request.form['target_branch']
 
-    changelog = generate_release_notes(
-        project_id,
-        endstr='  <br>',
-        since=None,
-        url=url,
-        private_token=private_token,
-        target_branch=target_branch,
-    )
-
-    return changelog
+    try:
+        changelog = generate_release_notes(
+            project_id,
+            endstr='  <br>',
+            since=None,
+            url=url,
+            private_token=private_token,
+            target_branch=target_branch,
+        )
+        return changelog
+    except ValueError as e:
+        return f"An error occurred: {str(e)}"
+    except Exception as e:
+        app.logger.error(f"An unexpected error occurred: {e}") # Good for server-side debugging
+        return "An unexpected error occurred. Please check the server logs."
 
 
 if __name__ == '__main__':
