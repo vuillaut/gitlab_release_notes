@@ -2,43 +2,12 @@
 
 Flask app deployed on heroku at https://gitlab-release-notes.herokuapp.com/
 
+## Do it online: 
+[![https://img.shields.io/badge/back4app-run-brightgreen](https://img.shields.io/badge/back4app-run-brightgreen)](https://gitlabreleasenotes-thomasvuillaume.b4a.run/)
 
-## Instructions
-
-The flask app can be run and tested separately by running
-```bash
-python run.py
-```
-
-### Install Heroku
-
-https://devcenter.heroku.com/articles/getting-started-with-python#set-up
-
-
-### Build and test locally:
-
-Install requirements:
-```
-pip install -r requirements.txt
-```
-
-Start app:
-```
-heroku local
-```
-
-### Push changes
-
-```
-git remote add heroku https://git.heroku.com/gitlab-release-notes.git
-```
-
-```
-git add
-git commit -m " "
-git push heroku master
-heroku open
-```
+## Alternative
+If the back4app is down for any reason, you may try on mybinder:
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vuillaut/GitlabReleaseNotesGenerator/HEAD?labpath=generate.ipynb)
 
 
 ## Install and run locally
@@ -53,27 +22,10 @@ Then run:
 gitlab-release-notes --help
 ```
 
-## Heroku 
+## Web App 
 
-Heroku is setup in the `heroku` branch.
+The webapp is currently running on back4app.
+
+back4app is setup in the `back4app` branch.
 - make a new release of `gitlab_release_notes`
-- manually deploy from https://dashboard.heroku.com/apps/gitlab-release-notes/deploy/github choosing the heroku branch
-
-
-## Install and run locally
-
-To install: 
-```
-pip install gitlab_release_notes
-```
-
-Then run:
-```
-gitlab-release-notes --help
-```
-
-## Heroku 
-
-Heroku is setup in the `heroku` branch.
-- make a new release of `gitlab_release_notes`
-- manually deploy from https://dashboard.heroku.com/apps/gitlab-release-notes/deploy/github choosing the heroku branch
+- https://www.back4app.com/
