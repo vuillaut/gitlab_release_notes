@@ -3,7 +3,7 @@
 Generate a changelog listing all merged requests since the last release of the repository.
 
 ## Do it online: 
-[![https://img.shields.io/badge/back4app-run-brightgreen](https://img.shields.io/badge/back4app-run-brightgreen)](https://gitlabreleasenotes-thomasvuillaume.b4a.run/)
+[![https://img.shields.io/badge/back4app-run-brightgreen](https://img.shields.io/badge/back4app-run-brightgreen)](https://gitlabreleasenotes1-0efvflns.b4a.run/)
 
 ## Alternative
 If the back4app is down for any reason, you may try on mybinder:
